@@ -13,7 +13,7 @@ function HomePage() {
       <div className="category-grid">
         {data.categories.map((cat) => (
           <Link to={`/category/${cat.strCategory}`} key={cat.idCategory} className="category-card">
-            <img src={cat.strCategoryThumb} alt={cat.strCategory} />
+            <img src={cat.strCategoryThumb} alt={cat.strCategory} width="100" />
             <h2>{cat.strCategory}</h2>
           </Link>
         ))}

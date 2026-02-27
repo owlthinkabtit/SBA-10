@@ -11,7 +11,7 @@ function RecipesPage() {
       <div className="recipe-grid">
         {data.meals.map((meal) => (
           <div key={meal.idMeal} className="recipe-card">
-            <img src={meal.strMealThumb} alt={meal.strMeal} width="200" />
+            <img src={meal.strMealThumb} alt={meal.strMeal} width="100" />
             <h3>{meal.strMeal}</h3>
           </div>
         ))}
