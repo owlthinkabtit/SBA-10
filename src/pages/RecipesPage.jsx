@@ -1,3 +1,4 @@
+import Spinner from "../components/Spinner";
 import useFetch from "../hooks/useFetch";
 import { useParams, Link } from "react-router-dom";
 
@@ -7,7 +8,7 @@ function RecipesPage() {
     `https://www.themealdb.com/api/json/v1/1/filter.php?c=${categoryName}`,
   );
 
-  if (loading) return <p>Yummy recipes are on their way...</p>;
+  if (loading) return <Spinner />;
   if (error) return <p>Error: {error}</p>;
 
   return (

@@ -1,6 +1,8 @@
 import { useFavorites } from '../context/FavoritesContext'
 import { Link } from "react-router-dom"
 import useFetch from '../hooks/useFetch';
+import RecipeCard from '../components/RecipeCard';
+import Spinner from '../components/Spinner';
 
 function FavoritesPage() {
   const { favorites } = useFavorites();
@@ -29,7 +31,7 @@ function FavoritesPage() {
 function FavoriteItem({ id }) {
   const { data, loading, error } = useFetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
   
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Spinner />;
   if (error || !data) return null;
 
   const meal = data.meals[0];

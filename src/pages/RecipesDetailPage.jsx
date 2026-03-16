@@ -1,6 +1,7 @@
 import { useFavorites } from "../context/FavoritesContext";
 import { useParams } from 'react-router-dom';
 import useFetch from '../hooks/useFetch';
+import Spinner from "../components/Spinner";
 
 
 
@@ -10,8 +11,8 @@ function RecipesDetailPage() {
   const heartClicked = isFavorite(recipeId);
   const { data, loading, error } = useFetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${recipeId}`);
 
-  if (loading) return <p>Loading recipe details...</p>;
-  if (error) return <p>ErrorL {error}</p>
+  if (loading) return <Spinner />;
+  if (error) return <p>Error: {error}</p>
 
   const meal = data.meals[0];
 
