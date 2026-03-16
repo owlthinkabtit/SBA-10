@@ -1,23 +1,32 @@
-import useFetch from '../hooks/useFetch';
+import useFetch from "../hooks/useFetch";
+import { useParams, Link } from "react-router-dom";
 
 function RecipesPage() {
-  const { data, loading, error } = useFetch('https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood');
-  if (loading) return <p>Yummy recipes are on their way...</p>
+  const { categoryName } = useParams();
+  const { data, loading, error } = useFetch(
+    `https://www.themealdb.com/api/json/v1/1/filter.php?c=${categoryName}`,
+  );
+
+  if (loading) return <p>Yummy recipes are on their way...</p>;
   if (error) return <p>Error: {error}</p>;
-  
+
   return (
     <div>
-      <h1>Seafood Recipes</h1>
+      <h1>{categoryName} Recipes</h1>
       <div className="recipe-grid">
         {data.meals.map((meal) => (
-          <div key={meal.idMeal} className="recipe-card">
+          <Link
+            to={`/recipe/${meal.idMeal}`}
+            key={meal.idMeal}
+            className="recipe-card"
+          >
             <img src={meal.strMealThumb} alt={meal.strMeal} width="100" />
             <h3>{meal.strMeal}</h3>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
   );
-};
+}
 
 export default RecipesPage;
