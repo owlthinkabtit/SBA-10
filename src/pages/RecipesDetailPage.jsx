@@ -10,11 +10,12 @@ function RecipesDetailPage() {
   const { data, loading, error } = useFetch(
     `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${recipeId}`,
   );
+  if (loading) return <Spinner />;
+  if (error) return <p>Error: {error}</p>;
+
   const meal = data.meals[0];
   const instructionsSteps = meal.strInstructions.split(".").filter((step) => step.trim().length > 0);
 
-  if (loading) return <Spinner />;
-  if (error) return <p>Error: {error}</p>;
 
 
   return (
@@ -23,7 +24,7 @@ function RecipesDetailPage() {
       <img
         src={meal.strMealThumb}
         alt={meal.strMeal}
-        style={{ width: "100px" }}
+        style={{ width: "300px" }}
       />
       <h3>Instructions</h3>
       <ol>
