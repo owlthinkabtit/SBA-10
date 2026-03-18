@@ -1,12 +1,36 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+
 
 function NavBar() {
+  const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchTerm.trim()) {
+      navigate(`/search/${searchTerm}`);
+      setSearchTerm("");
+    }
+  };
+
   return (
-    <nav>
-      <ul style={{ display: 'flex', gap: '20px', listStyle: 'none' }}>
-        <Link to="/"><li>Home</li></Link>
-        <Link to="/recipes"><li>RecipePage</li></Link>
-        <Link to="/favorites"><li>FavoritePage</li></Link>
+    <nav className="navbar">
+      <ul style={{ display: 'flex', gap: '20px', listStyle: 'none', alignContent: 'center' }}>
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/favorites">FavoritePage</Link></li>
+
+        <li>
+          <form onSubmit={handleSearch}>
+            <input  
+              type="text"
+              placeholder="Search recipes..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            <button type="submit"></button>  
+          </form>
+        </li>
       </ul>
     </nav>
   );
