@@ -28,7 +28,7 @@ function NavBar() {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-            <button type="submit"></button>  
+            <button type="submit">Search</button>  
           </form>
         </li>
       </ul>
